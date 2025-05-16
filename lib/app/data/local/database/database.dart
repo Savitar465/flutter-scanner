@@ -1,13 +1,15 @@
 import 'package:drift/drift.dart';
-import 'package:final_project/app/data/local/database/tables/plants.dart';
 import 'package:drift_flutter/drift_flutter.dart';
+import 'package:final_project/app/data/local/database/tables/plant_images.dart';
+import 'package:final_project/app/data/local/database/tables/plants.dart';
+import 'package:final_project/app/data/local/database/tables/plants_tags.dart';
+import 'package:final_project/app/data/local/database/tables/tags.dart';
+import 'package:final_project/app/data/local/database/tables/users.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'database.g.dart';
 
-@DriftDatabase(
-  tables: [Plants]
-)
+@DriftDatabase(tables: [Plants, Tags, PlantsTags, PlantImages, Users])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 

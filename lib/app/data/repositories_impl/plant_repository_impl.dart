@@ -18,4 +18,10 @@ class PlantRepositoryImpl implements PlantRepository {
     final plants = await db.select(db.plants).get();
     return plants.map(PlantModel.fromDrift).toList();
   }
+
+  @override
+  Future<PlantDomain?> getPlantById(int id) async {
+    final plant = await (db.select(db.plants)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
+    return plant != null ? PlantModel.fromDrift(plant) : null;
+  }
 }

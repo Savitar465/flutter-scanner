@@ -13,7 +13,6 @@ class PlantModel {
   );
 
   static PlantsCompanion toDrift(PlantDomain plant) => PlantsCompanion(
-    id: Value(plant.id),
     commonName: Value(plant.commonName),
     scientificName: Value(plant.scientificName),
     description: Value(plant.description),
