@@ -21,6 +21,17 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
       'PRIMARY KEY AUTOINCREMENT',
     ),
   );
+  static const VerificationMeta _customNameMeta = const VerificationMeta(
+    'customName',
+  );
+  @override
+  late final GeneratedColumn<String> customName = GeneratedColumn<String>(
+    'custom_name',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _commonNameMeta = const VerificationMeta(
     'commonName',
   );
@@ -42,6 +53,17 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
+  );
+  static const VerificationMeta _precisionMeta = const VerificationMeta(
+    'precision',
+  );
+  @override
+  late final GeneratedColumn<double> precision = GeneratedColumn<double>(
+    'precision',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
   );
   static const VerificationMeta _descriptionMeta = const VerificationMeta(
     'description',
@@ -65,6 +87,92 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _similarImagesMeta = const VerificationMeta(
+    'similarImages',
+  );
+  @override
+  late final GeneratedColumn<String> similarImages = GeneratedColumn<String>(
+    'similar_images',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _synonymsMeta = const VerificationMeta(
+    'synonyms',
+  );
+  @override
+  late final GeneratedColumn<String> synonyms = GeneratedColumn<String>(
+    'synonyms',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _wikiMeta = const VerificationMeta('wiki');
+  @override
+  late final GeneratedColumn<String> wiki = GeneratedColumn<String>(
+    'wiki',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _bestLightConditionMeta =
+      const VerificationMeta('bestLightCondition');
+  @override
+  late final GeneratedColumn<String> bestLightCondition =
+      GeneratedColumn<String>(
+        'best_light_condition',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _commonUsesMeta = const VerificationMeta(
+    'commonUses',
+  );
+  @override
+  late final GeneratedColumn<String> commonUses = GeneratedColumn<String>(
+    'common_uses',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _culturalSignificanceMeta =
+      const VerificationMeta('culturalSignificance');
+  @override
+  late final GeneratedColumn<String> culturalSignificance =
+      GeneratedColumn<String>(
+        'cultural_significance',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _toxicityMeta = const VerificationMeta(
+    'toxicity',
+  );
+  @override
+  late final GeneratedColumn<String> toxicity = GeneratedColumn<String>(
+    'toxicity',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _wateringMeta = const VerificationMeta(
+    'watering',
+  );
+  @override
+  late final GeneratedColumn<String> watering = GeneratedColumn<String>(
+    'watering',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
   );
@@ -80,10 +188,20 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
   @override
   List<GeneratedColumn> get $columns => [
     id,
+    customName,
     commonName,
     scientificName,
+    precision,
     description,
     imageUrl,
+    similarImages,
+    synonyms,
+    wiki,
+    bestLightCondition,
+    commonUses,
+    culturalSignificance,
+    toxicity,
+    watering,
     createdAt,
   ];
   @override
@@ -100,6 +218,12 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('custom_name')) {
+      context.handle(
+        _customNameMeta,
+        customName.isAcceptableOrUnknown(data['custom_name']!, _customNameMeta),
+      );
     }
     if (data.containsKey('common_name')) {
       context.handle(
@@ -120,6 +244,12 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
     } else if (isInserting) {
       context.missing(_scientificNameMeta);
     }
+    if (data.containsKey('precision')) {
+      context.handle(
+        _precisionMeta,
+        precision.isAcceptableOrUnknown(data['precision']!, _precisionMeta),
+      );
+    }
     if (data.containsKey('description')) {
       context.handle(
         _descriptionMeta,
@@ -133,6 +263,63 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
       context.handle(
         _imageUrlMeta,
         imageUrl.isAcceptableOrUnknown(data['image_url']!, _imageUrlMeta),
+      );
+    }
+    if (data.containsKey('similar_images')) {
+      context.handle(
+        _similarImagesMeta,
+        similarImages.isAcceptableOrUnknown(
+          data['similar_images']!,
+          _similarImagesMeta,
+        ),
+      );
+    }
+    if (data.containsKey('synonyms')) {
+      context.handle(
+        _synonymsMeta,
+        synonyms.isAcceptableOrUnknown(data['synonyms']!, _synonymsMeta),
+      );
+    }
+    if (data.containsKey('wiki')) {
+      context.handle(
+        _wikiMeta,
+        wiki.isAcceptableOrUnknown(data['wiki']!, _wikiMeta),
+      );
+    }
+    if (data.containsKey('best_light_condition')) {
+      context.handle(
+        _bestLightConditionMeta,
+        bestLightCondition.isAcceptableOrUnknown(
+          data['best_light_condition']!,
+          _bestLightConditionMeta,
+        ),
+      );
+    }
+    if (data.containsKey('common_uses')) {
+      context.handle(
+        _commonUsesMeta,
+        commonUses.isAcceptableOrUnknown(data['common_uses']!, _commonUsesMeta),
+      );
+    }
+    if (data.containsKey('cultural_significance')) {
+      context.handle(
+        _culturalSignificanceMeta,
+        culturalSignificance.isAcceptableOrUnknown(
+          data['cultural_significance']!,
+          _culturalSignificanceMeta,
+        ),
+      );
+    }
+    if (data.containsKey('toxicity')) {
+      context.handle(
+        _toxicityMeta,
+        toxicity.isAcceptableOrUnknown(data['toxicity']!, _toxicityMeta),
+      );
+    }
+    if (data.containsKey('watering')) {
+      context.handle(
+        _wateringMeta,
+        watering.isAcceptableOrUnknown(data['watering']!, _wateringMeta),
       );
     }
     if (data.containsKey('created_at')) {
@@ -155,6 +342,10 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
             DriftSqlType.int,
             data['${effectivePrefix}id'],
           )!,
+      customName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}custom_name'],
+      ),
       commonName:
           attachedDatabase.typeMapping.read(
             DriftSqlType.string,
@@ -165,6 +356,10 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
             DriftSqlType.string,
             data['${effectivePrefix}scientific_name'],
           )!,
+      precision: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}precision'],
+      ),
       description: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}description'],
@@ -172,6 +367,38 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
       imageUrl: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}image_url'],
+      ),
+      similarImages: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}similar_images'],
+      ),
+      synonyms: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}synonyms'],
+      ),
+      wiki: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}wiki'],
+      ),
+      bestLightCondition: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}best_light_condition'],
+      ),
+      commonUses: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}common_uses'],
+      ),
+      culturalSignificance: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}cultural_significance'],
+      ),
+      toxicity: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}toxicity'],
+      ),
+      watering: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}watering'],
       ),
       createdAt:
           attachedDatabase.typeMapping.read(
@@ -189,30 +416,80 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
 
 class Plant extends DataClass implements Insertable<Plant> {
   final int id;
+  final String? customName;
   final String commonName;
   final String scientificName;
+  final double? precision;
   final String? description;
   final String? imageUrl;
+  final String? similarImages;
+  final String? synonyms;
+  final String? wiki;
+  final String? bestLightCondition;
+  final String? commonUses;
+  final String? culturalSignificance;
+  final String? toxicity;
+  final String? watering;
   final DateTime createdAt;
   const Plant({
     required this.id,
+    this.customName,
     required this.commonName,
     required this.scientificName,
+    this.precision,
     this.description,
     this.imageUrl,
+    this.similarImages,
+    this.synonyms,
+    this.wiki,
+    this.bestLightCondition,
+    this.commonUses,
+    this.culturalSignificance,
+    this.toxicity,
+    this.watering,
     required this.createdAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
+    if (!nullToAbsent || customName != null) {
+      map['custom_name'] = Variable<String>(customName);
+    }
     map['common_name'] = Variable<String>(commonName);
     map['scientific_name'] = Variable<String>(scientificName);
+    if (!nullToAbsent || precision != null) {
+      map['precision'] = Variable<double>(precision);
+    }
     if (!nullToAbsent || description != null) {
       map['description'] = Variable<String>(description);
     }
     if (!nullToAbsent || imageUrl != null) {
       map['image_url'] = Variable<String>(imageUrl);
+    }
+    if (!nullToAbsent || similarImages != null) {
+      map['similar_images'] = Variable<String>(similarImages);
+    }
+    if (!nullToAbsent || synonyms != null) {
+      map['synonyms'] = Variable<String>(synonyms);
+    }
+    if (!nullToAbsent || wiki != null) {
+      map['wiki'] = Variable<String>(wiki);
+    }
+    if (!nullToAbsent || bestLightCondition != null) {
+      map['best_light_condition'] = Variable<String>(bestLightCondition);
+    }
+    if (!nullToAbsent || commonUses != null) {
+      map['common_uses'] = Variable<String>(commonUses);
+    }
+    if (!nullToAbsent || culturalSignificance != null) {
+      map['cultural_significance'] = Variable<String>(culturalSignificance);
+    }
+    if (!nullToAbsent || toxicity != null) {
+      map['toxicity'] = Variable<String>(toxicity);
+    }
+    if (!nullToAbsent || watering != null) {
+      map['watering'] = Variable<String>(watering);
     }
     map['created_at'] = Variable<DateTime>(createdAt);
     return map;
@@ -221,8 +498,16 @@ class Plant extends DataClass implements Insertable<Plant> {
   PlantsCompanion toCompanion(bool nullToAbsent) {
     return PlantsCompanion(
       id: Value(id),
+      customName:
+          customName == null && nullToAbsent
+              ? const Value.absent()
+              : Value(customName),
       commonName: Value(commonName),
       scientificName: Value(scientificName),
+      precision:
+          precision == null && nullToAbsent
+              ? const Value.absent()
+              : Value(precision),
       description:
           description == null && nullToAbsent
               ? const Value.absent()
@@ -231,6 +516,35 @@ class Plant extends DataClass implements Insertable<Plant> {
           imageUrl == null && nullToAbsent
               ? const Value.absent()
               : Value(imageUrl),
+      similarImages:
+          similarImages == null && nullToAbsent
+              ? const Value.absent()
+              : Value(similarImages),
+      synonyms:
+          synonyms == null && nullToAbsent
+              ? const Value.absent()
+              : Value(synonyms),
+      wiki: wiki == null && nullToAbsent ? const Value.absent() : Value(wiki),
+      bestLightCondition:
+          bestLightCondition == null && nullToAbsent
+              ? const Value.absent()
+              : Value(bestLightCondition),
+      commonUses:
+          commonUses == null && nullToAbsent
+              ? const Value.absent()
+              : Value(commonUses),
+      culturalSignificance:
+          culturalSignificance == null && nullToAbsent
+              ? const Value.absent()
+              : Value(culturalSignificance),
+      toxicity:
+          toxicity == null && nullToAbsent
+              ? const Value.absent()
+              : Value(toxicity),
+      watering:
+          watering == null && nullToAbsent
+              ? const Value.absent()
+              : Value(watering),
       createdAt: Value(createdAt),
     );
   }
@@ -242,10 +556,24 @@ class Plant extends DataClass implements Insertable<Plant> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Plant(
       id: serializer.fromJson<int>(json['id']),
+      customName: serializer.fromJson<String?>(json['customName']),
       commonName: serializer.fromJson<String>(json['commonName']),
       scientificName: serializer.fromJson<String>(json['scientificName']),
+      precision: serializer.fromJson<double?>(json['precision']),
       description: serializer.fromJson<String?>(json['description']),
       imageUrl: serializer.fromJson<String?>(json['imageUrl']),
+      similarImages: serializer.fromJson<String?>(json['similarImages']),
+      synonyms: serializer.fromJson<String?>(json['synonyms']),
+      wiki: serializer.fromJson<String?>(json['wiki']),
+      bestLightCondition: serializer.fromJson<String?>(
+        json['bestLightCondition'],
+      ),
+      commonUses: serializer.fromJson<String?>(json['commonUses']),
+      culturalSignificance: serializer.fromJson<String?>(
+        json['culturalSignificance'],
+      ),
+      toxicity: serializer.fromJson<String?>(json['toxicity']),
+      watering: serializer.fromJson<String?>(json['watering']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
     );
   }
@@ -254,41 +582,99 @@ class Plant extends DataClass implements Insertable<Plant> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
+      'customName': serializer.toJson<String?>(customName),
       'commonName': serializer.toJson<String>(commonName),
       'scientificName': serializer.toJson<String>(scientificName),
+      'precision': serializer.toJson<double?>(precision),
       'description': serializer.toJson<String?>(description),
       'imageUrl': serializer.toJson<String?>(imageUrl),
+      'similarImages': serializer.toJson<String?>(similarImages),
+      'synonyms': serializer.toJson<String?>(synonyms),
+      'wiki': serializer.toJson<String?>(wiki),
+      'bestLightCondition': serializer.toJson<String?>(bestLightCondition),
+      'commonUses': serializer.toJson<String?>(commonUses),
+      'culturalSignificance': serializer.toJson<String?>(culturalSignificance),
+      'toxicity': serializer.toJson<String?>(toxicity),
+      'watering': serializer.toJson<String?>(watering),
       'createdAt': serializer.toJson<DateTime>(createdAt),
     };
   }
 
   Plant copyWith({
     int? id,
+    Value<String?> customName = const Value.absent(),
     String? commonName,
     String? scientificName,
+    Value<double?> precision = const Value.absent(),
     Value<String?> description = const Value.absent(),
     Value<String?> imageUrl = const Value.absent(),
+    Value<String?> similarImages = const Value.absent(),
+    Value<String?> synonyms = const Value.absent(),
+    Value<String?> wiki = const Value.absent(),
+    Value<String?> bestLightCondition = const Value.absent(),
+    Value<String?> commonUses = const Value.absent(),
+    Value<String?> culturalSignificance = const Value.absent(),
+    Value<String?> toxicity = const Value.absent(),
+    Value<String?> watering = const Value.absent(),
     DateTime? createdAt,
   }) => Plant(
     id: id ?? this.id,
+    customName: customName.present ? customName.value : this.customName,
     commonName: commonName ?? this.commonName,
     scientificName: scientificName ?? this.scientificName,
+    precision: precision.present ? precision.value : this.precision,
     description: description.present ? description.value : this.description,
     imageUrl: imageUrl.present ? imageUrl.value : this.imageUrl,
+    similarImages:
+        similarImages.present ? similarImages.value : this.similarImages,
+    synonyms: synonyms.present ? synonyms.value : this.synonyms,
+    wiki: wiki.present ? wiki.value : this.wiki,
+    bestLightCondition:
+        bestLightCondition.present
+            ? bestLightCondition.value
+            : this.bestLightCondition,
+    commonUses: commonUses.present ? commonUses.value : this.commonUses,
+    culturalSignificance:
+        culturalSignificance.present
+            ? culturalSignificance.value
+            : this.culturalSignificance,
+    toxicity: toxicity.present ? toxicity.value : this.toxicity,
+    watering: watering.present ? watering.value : this.watering,
     createdAt: createdAt ?? this.createdAt,
   );
   Plant copyWithCompanion(PlantsCompanion data) {
     return Plant(
       id: data.id.present ? data.id.value : this.id,
+      customName:
+          data.customName.present ? data.customName.value : this.customName,
       commonName:
           data.commonName.present ? data.commonName.value : this.commonName,
       scientificName:
           data.scientificName.present
               ? data.scientificName.value
               : this.scientificName,
+      precision: data.precision.present ? data.precision.value : this.precision,
       description:
           data.description.present ? data.description.value : this.description,
       imageUrl: data.imageUrl.present ? data.imageUrl.value : this.imageUrl,
+      similarImages:
+          data.similarImages.present
+              ? data.similarImages.value
+              : this.similarImages,
+      synonyms: data.synonyms.present ? data.synonyms.value : this.synonyms,
+      wiki: data.wiki.present ? data.wiki.value : this.wiki,
+      bestLightCondition:
+          data.bestLightCondition.present
+              ? data.bestLightCondition.value
+              : this.bestLightCondition,
+      commonUses:
+          data.commonUses.present ? data.commonUses.value : this.commonUses,
+      culturalSignificance:
+          data.culturalSignificance.present
+              ? data.culturalSignificance.value
+              : this.culturalSignificance,
+      toxicity: data.toxicity.present ? data.toxicity.value : this.toxicity,
+      watering: data.watering.present ? data.watering.value : this.watering,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
     );
   }
@@ -297,10 +683,20 @@ class Plant extends DataClass implements Insertable<Plant> {
   String toString() {
     return (StringBuffer('Plant(')
           ..write('id: $id, ')
+          ..write('customName: $customName, ')
           ..write('commonName: $commonName, ')
           ..write('scientificName: $scientificName, ')
+          ..write('precision: $precision, ')
           ..write('description: $description, ')
           ..write('imageUrl: $imageUrl, ')
+          ..write('similarImages: $similarImages, ')
+          ..write('synonyms: $synonyms, ')
+          ..write('wiki: $wiki, ')
+          ..write('bestLightCondition: $bestLightCondition, ')
+          ..write('commonUses: $commonUses, ')
+          ..write('culturalSignificance: $culturalSignificance, ')
+          ..write('toxicity: $toxicity, ')
+          ..write('watering: $watering, ')
           ..write('createdAt: $createdAt')
           ..write(')'))
         .toString();
@@ -309,10 +705,20 @@ class Plant extends DataClass implements Insertable<Plant> {
   @override
   int get hashCode => Object.hash(
     id,
+    customName,
     commonName,
     scientificName,
+    precision,
     description,
     imageUrl,
+    similarImages,
+    synonyms,
+    wiki,
+    bestLightCondition,
+    commonUses,
+    culturalSignificance,
+    toxicity,
+    watering,
     createdAt,
   );
   @override
@@ -320,69 +726,151 @@ class Plant extends DataClass implements Insertable<Plant> {
       identical(this, other) ||
       (other is Plant &&
           other.id == this.id &&
+          other.customName == this.customName &&
           other.commonName == this.commonName &&
           other.scientificName == this.scientificName &&
+          other.precision == this.precision &&
           other.description == this.description &&
           other.imageUrl == this.imageUrl &&
+          other.similarImages == this.similarImages &&
+          other.synonyms == this.synonyms &&
+          other.wiki == this.wiki &&
+          other.bestLightCondition == this.bestLightCondition &&
+          other.commonUses == this.commonUses &&
+          other.culturalSignificance == this.culturalSignificance &&
+          other.toxicity == this.toxicity &&
+          other.watering == this.watering &&
           other.createdAt == this.createdAt);
 }
 
 class PlantsCompanion extends UpdateCompanion<Plant> {
   final Value<int> id;
+  final Value<String?> customName;
   final Value<String> commonName;
   final Value<String> scientificName;
+  final Value<double?> precision;
   final Value<String?> description;
   final Value<String?> imageUrl;
+  final Value<String?> similarImages;
+  final Value<String?> synonyms;
+  final Value<String?> wiki;
+  final Value<String?> bestLightCondition;
+  final Value<String?> commonUses;
+  final Value<String?> culturalSignificance;
+  final Value<String?> toxicity;
+  final Value<String?> watering;
   final Value<DateTime> createdAt;
   const PlantsCompanion({
     this.id = const Value.absent(),
+    this.customName = const Value.absent(),
     this.commonName = const Value.absent(),
     this.scientificName = const Value.absent(),
+    this.precision = const Value.absent(),
     this.description = const Value.absent(),
     this.imageUrl = const Value.absent(),
+    this.similarImages = const Value.absent(),
+    this.synonyms = const Value.absent(),
+    this.wiki = const Value.absent(),
+    this.bestLightCondition = const Value.absent(),
+    this.commonUses = const Value.absent(),
+    this.culturalSignificance = const Value.absent(),
+    this.toxicity = const Value.absent(),
+    this.watering = const Value.absent(),
     this.createdAt = const Value.absent(),
   });
   PlantsCompanion.insert({
     this.id = const Value.absent(),
+    this.customName = const Value.absent(),
     required String commonName,
     required String scientificName,
+    this.precision = const Value.absent(),
     this.description = const Value.absent(),
     this.imageUrl = const Value.absent(),
+    this.similarImages = const Value.absent(),
+    this.synonyms = const Value.absent(),
+    this.wiki = const Value.absent(),
+    this.bestLightCondition = const Value.absent(),
+    this.commonUses = const Value.absent(),
+    this.culturalSignificance = const Value.absent(),
+    this.toxicity = const Value.absent(),
+    this.watering = const Value.absent(),
     this.createdAt = const Value.absent(),
   }) : commonName = Value(commonName),
        scientificName = Value(scientificName);
   static Insertable<Plant> custom({
     Expression<int>? id,
+    Expression<String>? customName,
     Expression<String>? commonName,
     Expression<String>? scientificName,
+    Expression<double>? precision,
     Expression<String>? description,
     Expression<String>? imageUrl,
+    Expression<String>? similarImages,
+    Expression<String>? synonyms,
+    Expression<String>? wiki,
+    Expression<String>? bestLightCondition,
+    Expression<String>? commonUses,
+    Expression<String>? culturalSignificance,
+    Expression<String>? toxicity,
+    Expression<String>? watering,
     Expression<DateTime>? createdAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (customName != null) 'custom_name': customName,
       if (commonName != null) 'common_name': commonName,
       if (scientificName != null) 'scientific_name': scientificName,
+      if (precision != null) 'precision': precision,
       if (description != null) 'description': description,
       if (imageUrl != null) 'image_url': imageUrl,
+      if (similarImages != null) 'similar_images': similarImages,
+      if (synonyms != null) 'synonyms': synonyms,
+      if (wiki != null) 'wiki': wiki,
+      if (bestLightCondition != null)
+        'best_light_condition': bestLightCondition,
+      if (commonUses != null) 'common_uses': commonUses,
+      if (culturalSignificance != null)
+        'cultural_significance': culturalSignificance,
+      if (toxicity != null) 'toxicity': toxicity,
+      if (watering != null) 'watering': watering,
       if (createdAt != null) 'created_at': createdAt,
     });
   }
 
   PlantsCompanion copyWith({
     Value<int>? id,
+    Value<String?>? customName,
     Value<String>? commonName,
     Value<String>? scientificName,
+    Value<double?>? precision,
     Value<String?>? description,
     Value<String?>? imageUrl,
+    Value<String?>? similarImages,
+    Value<String?>? synonyms,
+    Value<String?>? wiki,
+    Value<String?>? bestLightCondition,
+    Value<String?>? commonUses,
+    Value<String?>? culturalSignificance,
+    Value<String?>? toxicity,
+    Value<String?>? watering,
     Value<DateTime>? createdAt,
   }) {
     return PlantsCompanion(
       id: id ?? this.id,
+      customName: customName ?? this.customName,
       commonName: commonName ?? this.commonName,
       scientificName: scientificName ?? this.scientificName,
+      precision: precision ?? this.precision,
       description: description ?? this.description,
       imageUrl: imageUrl ?? this.imageUrl,
+      similarImages: similarImages ?? this.similarImages,
+      synonyms: synonyms ?? this.synonyms,
+      wiki: wiki ?? this.wiki,
+      bestLightCondition: bestLightCondition ?? this.bestLightCondition,
+      commonUses: commonUses ?? this.commonUses,
+      culturalSignificance: culturalSignificance ?? this.culturalSignificance,
+      toxicity: toxicity ?? this.toxicity,
+      watering: watering ?? this.watering,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -393,17 +881,49 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
+    if (customName.present) {
+      map['custom_name'] = Variable<String>(customName.value);
+    }
     if (commonName.present) {
       map['common_name'] = Variable<String>(commonName.value);
     }
     if (scientificName.present) {
       map['scientific_name'] = Variable<String>(scientificName.value);
     }
+    if (precision.present) {
+      map['precision'] = Variable<double>(precision.value);
+    }
     if (description.present) {
       map['description'] = Variable<String>(description.value);
     }
     if (imageUrl.present) {
       map['image_url'] = Variable<String>(imageUrl.value);
+    }
+    if (similarImages.present) {
+      map['similar_images'] = Variable<String>(similarImages.value);
+    }
+    if (synonyms.present) {
+      map['synonyms'] = Variable<String>(synonyms.value);
+    }
+    if (wiki.present) {
+      map['wiki'] = Variable<String>(wiki.value);
+    }
+    if (bestLightCondition.present) {
+      map['best_light_condition'] = Variable<String>(bestLightCondition.value);
+    }
+    if (commonUses.present) {
+      map['common_uses'] = Variable<String>(commonUses.value);
+    }
+    if (culturalSignificance.present) {
+      map['cultural_significance'] = Variable<String>(
+        culturalSignificance.value,
+      );
+    }
+    if (toxicity.present) {
+      map['toxicity'] = Variable<String>(toxicity.value);
+    }
+    if (watering.present) {
+      map['watering'] = Variable<String>(watering.value);
     }
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
@@ -415,10 +935,20 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
   String toString() {
     return (StringBuffer('PlantsCompanion(')
           ..write('id: $id, ')
+          ..write('customName: $customName, ')
           ..write('commonName: $commonName, ')
           ..write('scientificName: $scientificName, ')
+          ..write('precision: $precision, ')
           ..write('description: $description, ')
           ..write('imageUrl: $imageUrl, ')
+          ..write('similarImages: $similarImages, ')
+          ..write('synonyms: $synonyms, ')
+          ..write('wiki: $wiki, ')
+          ..write('bestLightCondition: $bestLightCondition, ')
+          ..write('commonUses: $commonUses, ')
+          ..write('culturalSignificance: $culturalSignificance, ')
+          ..write('toxicity: $toxicity, ')
+          ..write('watering: $watering, ')
           ..write('createdAt: $createdAt')
           ..write(')'))
         .toString();
@@ -1456,19 +1986,39 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 typedef $$PlantsTableCreateCompanionBuilder =
     PlantsCompanion Function({
       Value<int> id,
+      Value<String?> customName,
       required String commonName,
       required String scientificName,
+      Value<double?> precision,
       Value<String?> description,
       Value<String?> imageUrl,
+      Value<String?> similarImages,
+      Value<String?> synonyms,
+      Value<String?> wiki,
+      Value<String?> bestLightCondition,
+      Value<String?> commonUses,
+      Value<String?> culturalSignificance,
+      Value<String?> toxicity,
+      Value<String?> watering,
       Value<DateTime> createdAt,
     });
 typedef $$PlantsTableUpdateCompanionBuilder =
     PlantsCompanion Function({
       Value<int> id,
+      Value<String?> customName,
       Value<String> commonName,
       Value<String> scientificName,
+      Value<double?> precision,
       Value<String?> description,
       Value<String?> imageUrl,
+      Value<String?> similarImages,
+      Value<String?> synonyms,
+      Value<String?> wiki,
+      Value<String?> bestLightCondition,
+      Value<String?> commonUses,
+      Value<String?> culturalSignificance,
+      Value<String?> toxicity,
+      Value<String?> watering,
       Value<DateTime> createdAt,
     });
 
@@ -1527,6 +2077,11 @@ class $$PlantsTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<String> get customName => $composableBuilder(
+    column: $table.customName,
+    builder: (column) => ColumnFilters(column),
+  );
+
   ColumnFilters<String> get commonName => $composableBuilder(
     column: $table.commonName,
     builder: (column) => ColumnFilters(column),
@@ -1537,6 +2092,11 @@ class $$PlantsTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<double> get precision => $composableBuilder(
+    column: $table.precision,
+    builder: (column) => ColumnFilters(column),
+  );
+
   ColumnFilters<String> get description => $composableBuilder(
     column: $table.description,
     builder: (column) => ColumnFilters(column),
@@ -1544,6 +2104,46 @@ class $$PlantsTableFilterComposer
 
   ColumnFilters<String> get imageUrl => $composableBuilder(
     column: $table.imageUrl,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get similarImages => $composableBuilder(
+    column: $table.similarImages,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get synonyms => $composableBuilder(
+    column: $table.synonyms,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get wiki => $composableBuilder(
+    column: $table.wiki,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get bestLightCondition => $composableBuilder(
+    column: $table.bestLightCondition,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get commonUses => $composableBuilder(
+    column: $table.commonUses,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get culturalSignificance => $composableBuilder(
+    column: $table.culturalSignificance,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get toxicity => $composableBuilder(
+    column: $table.toxicity,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get watering => $composableBuilder(
+    column: $table.watering,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -1617,6 +2217,11 @@ class $$PlantsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get customName => $composableBuilder(
+    column: $table.customName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get commonName => $composableBuilder(
     column: $table.commonName,
     builder: (column) => ColumnOrderings(column),
@@ -1627,6 +2232,11 @@ class $$PlantsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<double> get precision => $composableBuilder(
+    column: $table.precision,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get description => $composableBuilder(
     column: $table.description,
     builder: (column) => ColumnOrderings(column),
@@ -1634,6 +2244,46 @@ class $$PlantsTableOrderingComposer
 
   ColumnOrderings<String> get imageUrl => $composableBuilder(
     column: $table.imageUrl,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get similarImages => $composableBuilder(
+    column: $table.similarImages,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get synonyms => $composableBuilder(
+    column: $table.synonyms,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get wiki => $composableBuilder(
+    column: $table.wiki,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get bestLightCondition => $composableBuilder(
+    column: $table.bestLightCondition,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get commonUses => $composableBuilder(
+    column: $table.commonUses,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get culturalSignificance => $composableBuilder(
+    column: $table.culturalSignificance,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get toxicity => $composableBuilder(
+    column: $table.toxicity,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get watering => $composableBuilder(
+    column: $table.watering,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -1655,6 +2305,11 @@ class $$PlantsTableAnnotationComposer
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
+  GeneratedColumn<String> get customName => $composableBuilder(
+    column: $table.customName,
+    builder: (column) => column,
+  );
+
   GeneratedColumn<String> get commonName => $composableBuilder(
     column: $table.commonName,
     builder: (column) => column,
@@ -1665,6 +2320,9 @@ class $$PlantsTableAnnotationComposer
     builder: (column) => column,
   );
 
+  GeneratedColumn<double> get precision =>
+      $composableBuilder(column: $table.precision, builder: (column) => column);
+
   GeneratedColumn<String> get description => $composableBuilder(
     column: $table.description,
     builder: (column) => column,
@@ -1672,6 +2330,38 @@ class $$PlantsTableAnnotationComposer
 
   GeneratedColumn<String> get imageUrl =>
       $composableBuilder(column: $table.imageUrl, builder: (column) => column);
+
+  GeneratedColumn<String> get similarImages => $composableBuilder(
+    column: $table.similarImages,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get synonyms =>
+      $composableBuilder(column: $table.synonyms, builder: (column) => column);
+
+  GeneratedColumn<String> get wiki =>
+      $composableBuilder(column: $table.wiki, builder: (column) => column);
+
+  GeneratedColumn<String> get bestLightCondition => $composableBuilder(
+    column: $table.bestLightCondition,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get commonUses => $composableBuilder(
+    column: $table.commonUses,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get culturalSignificance => $composableBuilder(
+    column: $table.culturalSignificance,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get toxicity =>
+      $composableBuilder(column: $table.toxicity, builder: (column) => column);
+
+  GeneratedColumn<String> get watering =>
+      $composableBuilder(column: $table.watering, builder: (column) => column);
 
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
@@ -1756,33 +2446,73 @@ class $$PlantsTableTableManager
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
+                Value<String?> customName = const Value.absent(),
                 Value<String> commonName = const Value.absent(),
                 Value<String> scientificName = const Value.absent(),
+                Value<double?> precision = const Value.absent(),
                 Value<String?> description = const Value.absent(),
                 Value<String?> imageUrl = const Value.absent(),
+                Value<String?> similarImages = const Value.absent(),
+                Value<String?> synonyms = const Value.absent(),
+                Value<String?> wiki = const Value.absent(),
+                Value<String?> bestLightCondition = const Value.absent(),
+                Value<String?> commonUses = const Value.absent(),
+                Value<String?> culturalSignificance = const Value.absent(),
+                Value<String?> toxicity = const Value.absent(),
+                Value<String?> watering = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
               }) => PlantsCompanion(
                 id: id,
+                customName: customName,
                 commonName: commonName,
                 scientificName: scientificName,
+                precision: precision,
                 description: description,
                 imageUrl: imageUrl,
+                similarImages: similarImages,
+                synonyms: synonyms,
+                wiki: wiki,
+                bestLightCondition: bestLightCondition,
+                commonUses: commonUses,
+                culturalSignificance: culturalSignificance,
+                toxicity: toxicity,
+                watering: watering,
                 createdAt: createdAt,
               ),
           createCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
+                Value<String?> customName = const Value.absent(),
                 required String commonName,
                 required String scientificName,
+                Value<double?> precision = const Value.absent(),
                 Value<String?> description = const Value.absent(),
                 Value<String?> imageUrl = const Value.absent(),
+                Value<String?> similarImages = const Value.absent(),
+                Value<String?> synonyms = const Value.absent(),
+                Value<String?> wiki = const Value.absent(),
+                Value<String?> bestLightCondition = const Value.absent(),
+                Value<String?> commonUses = const Value.absent(),
+                Value<String?> culturalSignificance = const Value.absent(),
+                Value<String?> toxicity = const Value.absent(),
+                Value<String?> watering = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
               }) => PlantsCompanion.insert(
                 id: id,
+                customName: customName,
                 commonName: commonName,
                 scientificName: scientificName,
+                precision: precision,
                 description: description,
                 imageUrl: imageUrl,
+                similarImages: similarImages,
+                synonyms: synonyms,
+                wiki: wiki,
+                bestLightCondition: bestLightCondition,
+                commonUses: commonUses,
+                culturalSignificance: culturalSignificance,
+                toxicity: toxicity,
+                watering: watering,
                 createdAt: createdAt,
               ),
           withReferenceMapper:

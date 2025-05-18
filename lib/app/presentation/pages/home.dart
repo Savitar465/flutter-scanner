@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../application/notifiers/plant_list_notifier.dart';
+import '../../application/providers/selected_image_provider.dart';
+import '../../data/local/services/image_service.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -46,7 +48,7 @@ class HomePage extends ConsumerWidget {
                   const Text('No hay plantas guardadas.'),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () => context.go('/create-plant'),
+                    onPressed: () =>  _selectImage(context, ref),
                     child: const Text('Añadir una planta'),
                   ),
                 ],
@@ -99,10 +101,47 @@ class HomePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.go('/create-plant');
+          _selectImage(context, ref);
+          // context.go('/create-plant');
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.camera),
       ),
     );
   }
+}
+
+void _selectImage(BuildContext context, WidgetRef ref) {
+  final imageService = ref.read(imageServiceProvider);
+  showModalBottomSheet(
+    context: context,
+    builder: (_) => SafeArea(
+      child: Wrap(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.camera_alt),
+            title: const Text("Cámara"),
+            onTap: () async {
+              final image = await imageService.pickImageFromCamera();
+              if (image != null) {
+                ref.read(selectedImageProvider.notifier).state = image;
+                context.go("/create-plant");
+              }
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.photo_library),
+            title: const Text("Galería"),
+            onTap: () async {
+              final image = await imageService.pickImageFromGallery();
+              if (image != null) {
+                ref.read(selectedImageProvider.notifier).state = image;
+                context.go("/create-plant");
+              }
+              // Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    ),
+  );
 }

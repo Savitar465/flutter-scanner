@@ -15,6 +15,7 @@ class PlantNotifier extends StateNotifier<AsyncValue<void>> {
       await repository.addPlant(plant);
       state = const AsyncData(null);
     } catch (e, st) {
+      print('Error saving plant: $e');
       state = AsyncError(e, st);
     }
   }

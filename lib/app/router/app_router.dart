@@ -10,7 +10,7 @@ final appRouterProvider = Provider<GoRouter>((ref){
     initialLocation: '/',
     routes: [
       GoRoute(path: '/', builder: (context, state) => const HomePage()),
-      GoRoute(path: '/create-plant', builder: (context,state) => AddPlantPage()),
+      GoRoute(path: '/create-plant', builder: (context,state) => const AddPlantPage()),
       GoRoute(
         path: '/plant/:id',
         builder: (context, state) {
