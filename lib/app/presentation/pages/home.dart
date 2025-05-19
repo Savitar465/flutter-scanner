@@ -1,147 +1,37 @@
-import 'dart:io';
-
+import 'package:final_project/app/presentation/pages/favorites_page.dart';
+import 'package:final_project/app/presentation/pages/plants_page.dart';
+import 'package:final_project/app/presentation/pages/user_info.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../application/notifiers/plant_list_notifier.dart';
-import '../../application/providers/selected_image_provider.dart';
-import '../../data/local/services/image_service.dart';
+import '../../application/providers/bottom_index_provider.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
+  static final _pages = [FavoritesPage(), PlantsPlage(), UserInfoPage()];
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(plantListProvider.notifier).refresh();
-    final plantListAsync = ref.watch(plantListProvider);
-
+    final currentIndex = ref.watch(bottomNavIndexProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Plantas'),
-      ),
-      body: plantListAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.error_outline, size: 48, color: Colors.red),
-              const SizedBox(height: 16),
-              Text('Error: $e'),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () => ref.read(plantListProvider.notifier).refresh(),
-                child: const Text('Intentar de nuevo'),
-              ),
-            ],
+      body: _pages[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap:
+            (index) => ref.read(bottomNavIndexProvider.notifier).state = index,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_florist),
+            label: 'Plants',
           ),
-        ),
-        data: (plants) {
-          if (plants.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.local_florist_outlined, size: 64, color: Colors.grey),
-                  const SizedBox(height: 16),
-                  const Text('No hay plantas guardadas.'),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () =>  _selectImage(context, ref),
-                    child: const Text('Añadir una planta'),
-                  ),
-                ],
-              ),
-            );
-          }
-
-          return RefreshIndicator(
-            onRefresh: () async {
-              await ref.read(plantListProvider.notifier).refresh();
-            },
-            child: ListView.builder(
-              itemCount: plants.length,
-              itemBuilder: (context, index) {
-                final plant = plants[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.all(8),
-                    leading: SizedBox(
-                      width: 60,
-                      height: 60,
-                      child: plant.imageUrl != null
-                          ? Image.file(
-                        File(plant.imageUrl!),
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => const Icon(
-                          Icons.local_florist,
-                          size: 40,
-                        ),
-                      )
-                          : const Icon(Icons.local_florist, size: 40),
-                    ),
-                    title: Text(
-                      plant.commonName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(plant.scientificName),
-                    onTap: () {
-                      // Navigate to plant details when tapped
-                      context.go('/plant/${plant.id}');
-                    },
-                    trailing: const Icon(Icons.chevron_right),
-                  ),
-                );
-              },
-            ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _selectImage(context, ref);
-          // context.go('/create-plant');
-        },
-        child: const Icon(Icons.camera),
-      ),
-    );
-  }
-}
-
-void _selectImage(BuildContext context, WidgetRef ref) {
-  final imageService = ref.read(imageServiceProvider);
-  showModalBottomSheet(
-    context: context,
-    builder: (_) => SafeArea(
-      child: Wrap(
-        children: [
-          ListTile(
-            leading: const Icon(Icons.camera_alt),
-            title: const Text("Cámara"),
-            onTap: () async {
-              final image = await imageService.pickImageFromCamera();
-              if (image != null) {
-                ref.read(selectedImageProvider.notifier).state = image;
-                context.go("/create-plant");
-              }
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.photo_library),
-            title: const Text("Galería"),
-            onTap: () async {
-              final image = await imageService.pickImageFromGallery();
-              if (image != null) {
-                ref.read(selectedImageProvider.notifier).state = image;
-                context.go("/create-plant");
-              }
-              // Navigator.pop(context);
-            },
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
       ),
-    ),
-  );
+    );
+  }
 }
