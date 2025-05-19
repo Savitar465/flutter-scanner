@@ -170,10 +170,15 @@ class PlantDetailPage extends ConsumerWidget {
           isUrl
               ? GestureDetector(
             onTap: () async {
-              if (await canLaunchUrl(Uri.parse(content))) {
-                await launchUrl(Uri.parse(content));
-              } else {
-                throw 'Could not launch $content';
+              try {
+                final uri = Uri.parse(content);
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                } else {
+                  throw 'Could not launch $content';
+                }
+              } catch (e) {
+                debugPrint('Error launching URL: $e');
               }
             },
             child: Text(
